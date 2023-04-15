@@ -5,7 +5,7 @@ from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 from utils import *
 
-class PACDataset(Dataset):
+class PACStaticDataset(Dataset):
     def __init__(self,object_name,single_timestep = True,resolution = (64,64)):
         root_dir = "/Users/melkor/Documents/datasets/pac_data/{}/".format(object_name)
         self.root_dir = root_dir
