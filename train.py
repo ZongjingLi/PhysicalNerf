@@ -42,7 +42,7 @@ argparser.add_argument("--model_name",                  default = "vanilla")
 argparser.add_argument("--dataset_name",                default = "pac_dynamic")
 argparser.add_argument("--scene_name",                  default = "droplet")
 argparser.add_argument("--dynamic",                     default = 1)
-argparser.add_argument("--epoch",                       default = 1000)
+argparser.add_argument("--epoch",                       default = 1)
 
 args = argparser.parse_args()
 
