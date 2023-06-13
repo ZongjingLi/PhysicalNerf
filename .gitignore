@@ -400,3 +400,4 @@ FodyWeavers.xsd
 *.gif
 *.json
 datasets/pac_data/newtonian/0/.DS_Store
+*.ckpt
