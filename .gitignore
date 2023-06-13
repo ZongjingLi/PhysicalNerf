@@ -398,3 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 *.png
 *.gif
+*.json
+datasets/pac_data/newtonian/0/.DS_Store
