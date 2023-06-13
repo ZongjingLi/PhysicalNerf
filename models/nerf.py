@@ -6,3 +6,15 @@ class VanillaNERF(nn.Module):
         super().__init__()
 
     def forward(self, x, c2w):return x
+
+
+
+class PhysicsNerf(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+
+    def forward(self, x, c2w):return x
+
+
+
+
