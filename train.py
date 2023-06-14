@@ -47,7 +47,7 @@ argparser.add_argument("--epoch",                       default = 1)
 args = argparser.parse_args()
 
 if args.model_name == "vanilla":
-    model = VanillaNERF(config)
+    model = VanillaNerf(config)
 else:
     raise UnknownArgumentError
 
