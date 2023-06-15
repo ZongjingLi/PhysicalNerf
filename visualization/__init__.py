@@ -1,1 +1,1 @@
-from visualize_grid import *
+from .visualize_grid import *

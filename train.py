@@ -1,7 +1,7 @@
 from config import *
 from models import *
 from datasets import *
-from visualize import *
+from visualization import *
 
 class UnknownArgumentError(Exception):
     def __init__(self):super().__init__()

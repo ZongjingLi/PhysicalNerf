@@ -13,5 +13,7 @@ class PhysicSimulation(nn.Module):
         """
         evolution of the point cloud states, input [N,3]
         """
-        if self.model_name == "trivial":return state + torch.randn([state.shape[0], 3]) * self.dt
+        if self.model_name == "trivial":return state + torch.randn(state.shape) * self.dt
         
+        if self.model_name == "cauchy":
+            return state + 1/(torch.randn(state.shape) + 1) * self.dt
