@@ -20,6 +20,9 @@ class DynamicGrid(nn.Module):
         x, y, z = torch.meshgrid([x,y,z])
         self.x = x; self.y = y; self.z = z
 
+        # setup the physic model
+        self.physics_model = PhysicSimulation(config)
+
     def point2grid(self, lagrange_state):
         return 0
 

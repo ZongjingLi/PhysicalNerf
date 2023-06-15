@@ -6,4 +6,12 @@ class PhysicSimulation(nn.Module):
         super().__init__()
         self.config = config
         
-        model_name = config.physics_model
+        self.model_name = config.physics_model
+        self.dt = config.dt
+
+    def forward(self, state):
+        """
+        evolution of the point cloud states, input [N,3]
+        """
+        if self.model_name == "trivial":return state + torch.randn([state.shape[0], 3]) * self.dt
+        

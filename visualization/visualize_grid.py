@@ -1,5 +1,4 @@
 # show some 3d-point cloud data.
-from types import new_class
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
@@ -31,7 +30,7 @@ def visualize_points(x_points, file_name = "outputs/points.png"):
     ax.set_zlim(-rang, rang)
 
     # scatter points on the axis
-    ax.scatter(x_points[:,0], x_points[:,1], x_points[:,2], color = "cyan")
+    ax.scatter(x_points[:,0], x_points[:,1], x_points[:,2], color = "red")
     plt.savefig(file_name)
 
 import numpy as np
