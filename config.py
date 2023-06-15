@@ -13,4 +13,6 @@ parser.add_argument("--points_per_voxel",               default = 5)
 
 # physics simulation
 parser.add_argument("--physics_model",                  default = "cauchy")
+parser.add_argument("--init_shear",                     default = 1.0)
+parser.add_argument("--init_bulk",                      default = 1.0)
 config = parser.parse_args(args = [])
