@@ -10,4 +10,7 @@ parser.add_argument("--resolution",                     default = (128,128))
 # grid-evolution configuration
 parser.add_argument("--voxel_size",                     default = (64,64,64))
 parser.add_argument("--points_per_voxel",               default = 5)
+
+# physics simulation
+parser.add_argument("--physics_model",                  default = "cauchy")
 config = parser.parse_args(args = [])

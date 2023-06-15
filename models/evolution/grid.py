@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 
 import numpy as np
+from .physics_simulation import *
 
 class DynamicGrid(nn.Module):
     def __init__(self, config):
