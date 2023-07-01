@@ -35,3 +35,4 @@ for t in range(T):
     curr_color = colors
     ax.scatter(curr_state[:,0], curr_state[:,1], curr_state[:,2] ,c = colors, cmap = "rainbow")
     plt.pause(0.01)
+
