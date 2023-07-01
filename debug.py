@@ -35,6 +35,10 @@ render()
 
 from PIL import Image
 import IPython
+import matplotlib.pyplot as plt
 
 img = Image.fromarray((255 * pixels.to_numpy()).astype('uint8')).transpose(Image.Transpose.TRANSPOSE)
-IPython.display.display(img)
+#IPython.display.display(img)
+
+plt.imshow(img)
+plt.show()
