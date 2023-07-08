@@ -28,7 +28,7 @@ class MaterialPointModel2d(nn.Module): # it is actuall material point
     def __init__(self):
         super().__init__()        
         quality = 1  # Use a larger value for higher-res simulations
-        n_particles, n_grid = 9000 * quality**2, 128 * quality
+        n_particles, n_grid = 18000 * quality**2, 128 * quality
         self.n_particles = n_particles
         self.n_grid = n_grid
         dx, inv_dx = 1 / n_grid, float(n_grid)
@@ -36,7 +36,7 @@ class MaterialPointModel2d(nn.Module): # it is actuall material point
         self.dx = dx; 
         dt = 1e-4 / quality
         self.dt = dt
-        p_vol, p_rho = (dx * 0.5) ** 2, 1
+        p_vol, p_rho = (dx * 0.5) ** 2, 1.0
         self.p_vol = p_vol
         self.p_rho = p_rho
     
@@ -141,7 +141,6 @@ class MaterialPointModel2d(nn.Module): # it is actuall material point
         group_size = self.n_particles // 3
 
         for i in range(self.n_particles):
-            if 1:
                 self.x[i] = [
                 ti.random() * 0.2 + 0.3 + 0.10 * (i // group_size),
                 ti.random() * 0.2 + 0.05 + 0.32 * (i // group_size)
@@ -287,11 +286,11 @@ class MaterialPointModel3d(nn.Module): # it is actuall material point
 if __name__ == "__main__":
 
     gui = ti.GUI("Taichi MLS-MPM-128", res=512, background_color=0x112F41)
-    dim = 2
-    mpm = MaterialPointModel3d() if dim == 3 else MaterialPointModel2d()
+
+    mpm = MaterialPointModel2d()
     mpm.reset()
     
-    mpm.gravity[None] = [0, 0, -1] if dim == 3 else [0, -1]
+    mpm.gravity[None] = [0, -9.8]
 
     for frame in range(20000):
         if gui.get_event(ti.GUI.PRESS):
@@ -300,16 +299,13 @@ if __name__ == "__main__":
             elif gui.event.key in [ti.GUI.ESCAPE, ti.GUI.EXIT]:
                 break
  
-        mouse = gui.get_cursor_pos()
-
-
         for s in range(int(2e-3 // mpm.dt)):
             mpm.substep()
-
-            gui.circles(
-            mpm.x.to_numpy()[:,:2],
+            
+            gui.circles(   
+            mpm.x.to_numpy(),
             radius=1.5,
-            palette=[0x068587, 0xED553B, 0xEEEEF0],
+            palette=[0x068587, 0x292929, 0xEEEEF0],
             palette_indices=mpm.material,
         )
 
