@@ -138,18 +138,31 @@ class MaterialPointModel2d(nn.Module): # it is actuall material point
 
     @ti.kernel
     def reset(self):
-        group_size = self.n_particles // 3
+        group_size = self.n_particles // 2
 
         for i in range(self.n_particles):
-                self.x[i] = [
-                ti.random() * 0.2 + 0.3 + 0.10 * (i // group_size),
-                ti.random() * 0.2 + 0.05 + 0.32 * (i // group_size)
-                ]
-                self.material[i] = i // group_size  # 0: fluid 1: jelly 2: snow
-                self.v[i] = [0, 0]
-                self.F[i] = ti.Matrix([[1, 0], [0, 1]])
-                self.Jp[i] = 1
-                self.C[i] = ti.Matrix.zero(float, 2, 2)
+                if (i // group_size) == 0:
+                    t = ti.random() * 6.4
+                    r = ti.random() * 0.1 + 0.05
+                    self.x[i] = [
+                        r * ti.sin(t) + 0.3,
+                        r * ti.cos(t) + 0.5,
+                    ]
+                    self.material[i] = i // group_size 
+                    self.v[i] = [-2, 0]
+                    self.F[i] = ti.Matrix([[1, 0], [0, 1]])
+                    self.Jp[i] = 1
+                    self.C[i] = ti.Matrix.zero(float, 2, 2)
+                if (i // group_size) == 1:
+                    self.x[i] = [
+                    ti.random() * 0.4 + .5,
+                    ti.random() * 0.2 + .37
+                    ]
+                    self.material[i] = i // group_size 
+                    self.v[i] = [3.0, 10.0]
+                    self.F[i] = ti.Matrix([[1, 0], [0, 1]])
+                    self.Jp[i] = 10.
+                    self.C[i] = ti.Matrix.zero(float, 2, 2)
 
 @ti.data_oriented
 class MaterialPointModel3d(nn.Module): # it is actuall material point
@@ -285,7 +298,7 @@ class MaterialPointModel3d(nn.Module): # it is actuall material point
 
 if __name__ == "__main__":
 
-    gui = ti.GUI("Taichi MLS-MPM-128", res=512, background_color=0x112F41)
+    gui = ti.GUI("Taichi MLS-MPM-128", res=512, background_color=0xD7E3F8)
 
     mpm = MaterialPointModel2d()
     mpm.reset()
@@ -305,7 +318,7 @@ if __name__ == "__main__":
             gui.circles(   
             mpm.x.to_numpy(),
             radius=1.5,
-            palette=[0x068587, 0x292929, 0xEEEEF0],
+            palette=[0x2E93D1, 0xF97934, 0xC3F2F9],
             palette_indices=mpm.material,
         )
 
