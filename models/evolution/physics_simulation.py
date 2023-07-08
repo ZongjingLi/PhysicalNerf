@@ -149,7 +149,7 @@ class MaterialPointModel2d(nn.Module): # it is actuall material point
                         r * ti.cos(t) + 0.5,
                     ]
                     self.material[i] = i // group_size 
-                    self.v[i] = [-2, 0]
+                    self.v[i] = [-2, 3]
                     self.F[i] = ti.Matrix([[1, 0], [0, 1]])
                     self.Jp[i] = 1
                     self.C[i] = ti.Matrix.zero(float, 2, 2)
@@ -318,7 +318,7 @@ if __name__ == "__main__":
             gui.circles(   
             mpm.x.to_numpy(),
             radius=1.5,
-            palette=[0x2E93D1, 0xF97934, 0xC3F2F9],
+            palette=[0x2E93D1, 0xF97934, 0xC3F2F9, 0xFFFFF1],
             palette_indices=mpm.material,
         )
 
