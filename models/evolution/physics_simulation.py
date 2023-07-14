@@ -303,7 +303,7 @@ if __name__ == "__main__":
     mpm = MaterialPointModel2d()
     mpm.reset()
     
-    mpm.gravity[None] = [0, -9.8]
+    mpm.gravity[None] = [0, -1.8]
 
     for frame in range(20000):
         if gui.get_event(ti.GUI.PRESS):
@@ -314,7 +314,6 @@ if __name__ == "__main__":
  
         for s in range(int(2e-3 // mpm.dt)):
             mpm.substep()
-            
             gui.circles(   
             mpm.x.to_numpy(),
             radius=1.5,
