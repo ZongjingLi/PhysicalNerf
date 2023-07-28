@@ -65,6 +65,7 @@ class PACStaticDataset(Dataset):
 class PACDynamicDataset(Dataset):
     def __init__(self,object_name,single_timestep = True,resolution = (64,64)):
         root_dir = "datasets/pac_data/{}/".format(object_name)
+        print(root_dir)
         self.root_dir = root_dir
         self.resolution = resolution
 

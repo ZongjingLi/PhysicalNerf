@@ -1,7 +1,7 @@
 from config import *
 from models import *
 from datasets import *
-#from visualize import *
+from visualization import *
 
 class UnknownArgumentError(Exception):
     def __init__(self):super().__init__()
@@ -24,7 +24,7 @@ def train(model, config, args):
             outputs = model(images, c2w)
 
             #print(images.shape, c2w.shape)
-            ##visualize_image_grid(images[:10],row = 5, save_name="nerf_views_{}".format(i))
+            visualize_image_grid(images[:10],row = 5, save_name="nerf_views_{}".format(i))
             frames.append(Image.open("outputs/nerf_views_{}.png".format(i)))
         
         frame_one = frames[0]
@@ -50,5 +50,5 @@ if args.model_name == "vanilla":
     model = VanillaNERF(config)
 else:
     raise UnknownArgumentError
-
+print(args.scene_name)
 train(model, config, args)
