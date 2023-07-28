@@ -3,6 +3,9 @@ from models import *
 from datasets import *
 from visualization import *
 
+from torch.utils.tensorboard import SummaryWriter
+import datetime
+
 class UnknownArgumentError(Exception):
     def __init__(self):super().__init__()
 
@@ -12,9 +15,20 @@ def train(model, config, args):
     if args.dataset_name == "pac_dynamic":
         dataset = PACDynamicDataset(args.scene_name, resolution = config.resolution)
 
+    itrs = 0
+    start = time.time()
+    logging_root = "./logs"
+    ckpt_dir     = os.path.join(logging_root, 'checkpoints')
+    events_dir   = os.path.join(logging_root, 'events')
+    if not os.path.exists(ckpt_dir): os.makedirs(ckpt_dir)
+    if not os.path.exists(events_dir): os.makedirs(events_dir)
+    writer = SummaryWriter(events_dir)
+
     print("Experiment Started:")
     print("Static Frame Training")
+
     for epoch in range(args.epoch):
+        itrs += 1
         frames = []
         for i in range(len(dataset)):
             sample = dataset[i]

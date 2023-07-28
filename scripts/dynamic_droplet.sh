@@ -1,1 +1,1 @@
-python train.py --dynamic=1 --scene_name="droplet"
+/Users/melkor/miniforge3/envs/Melkor/bin/python train.py --dynamic=1 --scene_name="droplet"
