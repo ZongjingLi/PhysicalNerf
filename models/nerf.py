@@ -1,12 +1,38 @@
 import torch
 import torch.nn as nn
 
-from .evolution import *
-from .projection import *
-
-class VanillaNerf(nn.Module):
+class VanillaNERF(nn.Module):
     def __init__(self, config):
         super().__init__()
 
+    def forward(self, x, c2w):
+        W, H, D = 
+
+
+
+
+
+
+        return x
+
+
+
+class PhysicsNerf(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+
+
+
+
+
+
+
+
+
+
+
     def forward(self, x, c2w):return x
+
+
+
 

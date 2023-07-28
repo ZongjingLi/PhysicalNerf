@@ -1,7 +1,7 @@
 from config import *
 from models import *
 from datasets import *
-from visualization import *
+#from visualize import *
 
 from torch.utils.tensorboard import SummaryWriter
 import datetime
@@ -38,7 +38,7 @@ def train(model, config, args):
             outputs = model(images, c2w)
 
             #print(images.shape, c2w.shape)
-            visualize_image_grid(images[:10],row = 5, save_name="nerf_views_{}".format(i))
+            ##visualize_image_grid(images[:10],row = 5, save_name="nerf_views_{}".format(i))
             frames.append(Image.open("outputs/nerf_views_{}.png".format(i)))
         
         frame_one = frames[0]
@@ -61,7 +61,7 @@ argparser.add_argument("--epoch",                       default = 1)
 args = argparser.parse_args()
 
 if args.model_name == "vanilla":
-    model = VanillaNerf(config)
+    model = VanillaNERF(config)
 else:
     raise UnknownArgumentError
 
