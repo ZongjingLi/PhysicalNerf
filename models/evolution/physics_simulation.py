@@ -139,26 +139,27 @@ class MaterialPointModel2d(nn.Module): # it is actuall material point
     @ti.kernel
     def reset(self):
         group_size = self.n_particles // 2
+        num = 1000
 
         for i in range(self.n_particles):
-                if (i // group_size) == 0:
+                if (i >= num):
                     t = ti.random() * 6.4
                     r = ti.random() * 0.1 + 0.05
                     self.x[i] = [
                         r * ti.sin(t) + 0.3,
                         r * ti.cos(t) + 0.5,
                     ]
-                    self.material[i] = i // group_size 
+                    self.material[i] = 0
                     self.v[i] = [-2, 3]
                     self.F[i] = ti.Matrix([[1, 0], [0, 1]])
                     self.Jp[i] = 1
                     self.C[i] = ti.Matrix.zero(float, 2, 2)
-                if (i // group_size) == 1:
+                if i < num:
                     self.x[i] = [
-                    ti.random() * 0.4 + .5,
-                    ti.random() * 0.2 + .37
+                    ti.random() * 0.2 + .5,
+                    ti.random() * 0.1 + .37
                     ]
-                    self.material[i] = i // group_size 
+                    self.material[i] = 1
                     self.v[i] = [3.0, 10.0]
                     self.F[i] = ti.Matrix([[1, 0], [0, 1]])
                     self.Jp[i] = 10.
